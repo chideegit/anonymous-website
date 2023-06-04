@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+
+<div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% if obj %}
+        {% for o in obj %}
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Anonymous Message</h5>
+                    <p class="card-text">{{o.message}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">{{o.timestamp|naturaltime}}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>You do not have any secret message yet</h2>
+        {% endif %}
+        
+    </div>
+</div>
+
+{% endblock content %}

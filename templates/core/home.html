@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Django Anonymous</h1>
+        <p class="col-md-8 fs-4">
+            Let your friends write you a secret message. All you have to do is to
+            share your profile link with them and they will drop a message for you!
+            You might even get lucky to discover a long time crush on you💕
+        </p>
+        {% if request.user.is_authenticated %}
+
+        <form class="row gy-2 gx-3 align-items-center">
+            <div class="col-md-4">
+                <input type="text" id="myInput" class="form-control" id="autoSizingInput"
+                    value="http://127.0.0.1:8000/add-anon-message/{{request.user.id}}">
+            </div>
+
+            <div class="col-auto">
+                <button type="submit" onclick="myFunction()" class="btn btn-primary">Copy Link</button>
+            </div>
+        </form>
+        {% else %}
+        <p>Create an account now to receive anonymous messages from your friends! <a href="{% url 'register' %}">Create
+                Account</a></p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        // Get the text field
+        var copyText = document.getElementById("myInput");
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+        // Alert the copied text
+        alert("Copied the text: " + copyText.value);
+    }
+</script>
+{% endblock content %}
